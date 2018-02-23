@@ -10,7 +10,12 @@ const createNotEnumerableProperty = (property) => {
   return property;
 };
 
-const createProtoMagicObject = () => {};
+const createProtoMagicObject = () => {
+  var noProto = new Function();
+  noProto.prototype = noProto.__proto__;
+  return noProto;
+};
+
 const incrementor = () => {};
 const asyncIncrementor = () => {};
 const createIncrementer = () => {};
