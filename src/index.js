@@ -36,12 +36,19 @@ const asyncIncrementor = () => {
 const createIncrementer = () => {};
 
 // return same argument not earlier than in one second, and not later, than in two
-const returnBackInSecond = () => {};
+
+const returnBackInSecond = (result) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(result), 1000);
+  });
+};
+
 const getDeepPropertiesCount = () => {};
 
 const createSerializedObject = () => {return null;};
 
 const toBuffer = () => {};
+
 const sortByProto = () => {};
 
 exports.createEnumerableProperty = createEnumerableProperty;
