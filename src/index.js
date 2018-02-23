@@ -16,7 +16,15 @@ const createProtoMagicObject = () => {
   return noProto;
 };
 
-const incrementor = () => {};
+var count=0;
+const incrementor = () => {
+  count++;
+  Function.prototype.valueOf = function () {
+      return count;
+  }
+  return incrementor;
+};
+
 const asyncIncrementor = () => {};
 const createIncrementer = () => {};
 
