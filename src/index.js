@@ -33,7 +33,21 @@ const asyncIncrementor = () => {
     })
 };
 
-const createIncrementer = () => {};
+const createIncrementer = () => {
+  return {
+    iterator: 1,
+    next() {
+      return {value: this.iterator++}
+    },
+    [Symbol.iterator]: function() {
+      return {
+        next: () => {
+          return this.next()
+        }
+      }
+    }
+  }
+};
 
 // return same argument not earlier than in one second, and not later, than in two
 
