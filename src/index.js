@@ -57,7 +57,15 @@ const returnBackInSecond = (result) => {
   });
 };
 
-const getDeepPropertiesCount = () => {};
+const getDeepPropertiesCount = (obj) => {
+  var arr=Object.getOwnPropertyNames(obj).length;
+  Object.getOwnPropertyNames(obj).forEach(function(val, idx, array) {
+    if (Object.getOwnPropertyNames(obj[val]).length>0) {
+      arr+=getDeepPropertiesCount(obj[val]);
+    }
+  })
+  return arr;
+};
 
 const createSerializedObject = () => {return null;};
 
