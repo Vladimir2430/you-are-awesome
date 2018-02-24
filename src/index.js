@@ -71,7 +71,23 @@ const createSerializedObject = () => {return null;};
 
 const toBuffer = () => {};
 
-const sortByProto = () => {};
+const sortByProto = (obj) => {
+  var first = obj.map(function(value, index) {
+    var count=0;
+    while (value=value.__proto__) {
+      count+=1;
+    }
+      return [count, obj[index]];
+  });
+
+  var second = first.sort(function(a, b) {
+    return a[0]-b[0];
+  });
+
+  return second.map(function([value, index]) {
+    return index;
+  })
+};
 
 exports.createEnumerableProperty = createEnumerableProperty;
 exports.createNotEnumerableProperty = createNotEnumerableProperty;
