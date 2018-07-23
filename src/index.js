@@ -1,36 +1,32 @@
-// DO WHATEVER YOU WANT HERE
-
-const createEnumerableProperty = (property) => {return property;};
+const createEnumerableProperty = (property) =>  property;
 
 const createNotEnumerableProperty = (property) => {
   Object.defineProperty(Object.prototype, property, {
     enumerable: false,
     value: 'value'
-});
+  });
   return property;
 };
 
 const createProtoMagicObject = () => {
-  var noProto = new Function();
+  let noProto = new Function();
   noProto.prototype = noProto.__proto__;
   return noProto;
 };
 
-var count=0;
+let count = 0;
 const incrementor = () => {
   count++;
-  Function.prototype.valueOf = function () {
-      return count;
-  }
+  Function.prototype.valueOf = () => count;
   return incrementor;
 };
 
-var sum=0;
+let sum = 0;
 const asyncIncrementor = () => {
   return new Promise((resolve, reject) => {
     sum++;
     return resolve(sum);
-    })
+  })
 };
 
 const createIncrementer = () => {
@@ -41,15 +37,11 @@ const createIncrementer = () => {
     },
     [Symbol.iterator]: function() {
       return {
-        next: () => {
-          return this.next()
-        }
+        next: () => this.next()
       }
     }
   }
 };
-
-// return same argument not earlier than in one second, and not later, than in two
 
 const returnBackInSecond = (result) => {
   return new Promise((resolve, reject) => {
@@ -58,44 +50,40 @@ const returnBackInSecond = (result) => {
 };
 
 const getDeepPropertiesCount = (obj) => {
-  var arr=Object.getOwnPropertyNames(obj).length;
+  let arr = Object.getOwnPropertyNames(obj).length;
   Object.getOwnPropertyNames(obj).forEach(function(val, idx, array) {
-    if (Object.getOwnPropertyNames(obj[val]).length>0) {
-      arr+=getDeepPropertiesCount(obj[val]);
+    if (Object.getOwnPropertyNames(obj[val]).length > 0) {
+      arr += getDeepPropertiesCount(obj[val]);
     }
   })
   return arr;
 };
 
-const createSerializedObject = () => {return null;};
+const createSerializedObject = () => null;
 
 const toBuffer = () => {};
 
 const sortByProto = (obj) => {
-  var first = obj.map(function(value, index) {
-    var count=0;
-    while (value=value.__proto__) {
-      count+=1;
+  let first = obj.map(function(value, index) {
+    let count = 0;
+    while (value = value.__proto__) {
+      count += 1;
     }
-      return [count, obj[index]];
+    return [count, obj[index]];
   });
 
-  var second = first.sort(function(a, b) {
-    return a[0]-b[0];
-  });
+  let second = first.sort((a, b) => a[0] - b[0]);
 
-  return second.map(function([value, index]) {
-    return index;
-  })
+  return second.map(([value, index]) => index);
 };
 
-exports.createEnumerableProperty = createEnumerableProperty;
+exports.createEnumerableProperty    = createEnumerableProperty;
 exports.createNotEnumerableProperty = createNotEnumerableProperty;
-exports.createProtoMagicObject = createProtoMagicObject;
-exports.incrementor = incrementor;
-exports.asyncIncrementor = asyncIncrementor;
-exports.createIncrementer = createIncrementer;
-exports.returnBackInSecond = returnBackInSecond;
-exports.getDeepPropertiesCount = getDeepPropertiesCount;
-exports.createSerializedObject = createSerializedObject;
-exports.sortByProto = sortByProto;
+exports.createProtoMagicObject      = createProtoMagicObject;
+exports.incrementor                 = incrementor;
+exports.asyncIncrementor            = asyncIncrementor;
+exports.createIncrementer           = createIncrementer;
+exports.returnBackInSecond          = returnBackInSecond;
+exports.getDeepPropertiesCount      = getDeepPropertiesCount;
+exports.createSerializedObject      = createSerializedObject;
+exports.sortByProto                 = sortByProto;
